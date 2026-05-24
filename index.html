@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Binta Bah — Portfolio UI/UX</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Palette & variables ─────────────────────── */
+    :root {
+      --cream:    #F5F0E8;
+      --sand:     #EDE5D4;
+      --warm:     #D4C5A9;
+      --terracotta: #B5784A;
+      --charcoal: #2C2925;
+      --ink:      #4A4540;
+      --muted:    #8A8178;
+      --white:    #FDFAF5;
+    }
+
+    /* ── Reset & base ────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      line-height: 1.15;
+    }
+
+    /* ── Navigation ──────────────────────────────── */
+    .navbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--warm);
+      padding: 1.2rem 0;
+    }
+
+    .navbar-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--charcoal) !important;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-link {
+      color: var(--ink) !important;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 400;
+      padding: 0.4rem 1rem !important;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover { color: var(--terracotta) !important; }
+
+    /* ── Hero ────────────────────────────────────── */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: var(--sand);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -80px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: var(--warm);
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 7vw, 6rem);
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title em {
+      color: var(--terracotta);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--ink);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .btn-primary-custom {
+      background: var(--charcoal);
+      color: var(--white);
+      border: none;
+      padding: 0.85rem 2.2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .btn-primary-custom:hover {
+      background: var(--terracotta);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-custom {
+      background: transparent;
+      color: var(--charcoal);
+      border: 1.5px solid var(--charcoal);
+      padding: 0.85rem 2.2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.25s;
+      margin-left: 1rem;
+    }
+
+    .btn-outline-custom:hover {
+      background: var(--charcoal);
+      color: var(--white);
+    }
+
+    /* ── Section base ────────────────────────────── */
+    section { padding: 6rem 0; }
+
+    .section-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--terracotta);
+      margin-bottom: 2rem;
+    }
+
+    /* ── À propos ────────────────────────────────── */
+    #about { background: var(--cream); }
+
+    .about-photo-frame {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--sand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--muted);
+      font-style: italic;
+      border: 1px solid var(--warm);
+      position: relative;
+    }
+
+    .about-photo-frame::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: -16px;
+      bottom: -16px;
+      border: 1px solid var(--warm);
+      z-index: -1;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      background: var(--sand);
+      color: var(--ink);
+      border: 1px solid var(--warm);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.9rem;
+      margin: 0.2rem;
+      font-weight: 400;
+    }
+
+    /* ── Comment je travaille ────────────────────── */
+    #work { background: var(--white); }
+
+    .work-card {
+      background: var(--cream);
+      border: 1px solid var(--warm);
+      padding: 2rem 1.8rem;
+      height: 100%;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+    }
+
+    .work-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(44,41,37,0.08);
+    }
+
+    .work-card-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      color: var(--warm);
+      line-height: 1;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .work-card h4 {
+      font-size: 1.3rem;
+      color: var(--charcoal);
+      margin-bottom: 0.8rem;
+    }
+
+    .work-card p {
+      font-size: 0.92rem;
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    .work-card a {
+      color: var(--terracotta);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .work-card a:hover { text-decoration: underline; }
+
+    /* ── Études de cas ───────────────────────────── */
+    #designs { background: var(--cream); }
+
+    .design-card {
+      background: var(--white);
+      border: 1px solid var(--warm);
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      height: 100%;
+    }
+
+    .design-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(44,41,37,0.1);
+      color: inherit;
+    }
+
+    .design-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .design-1 { background: #E8DDD0; }
+    .design-2 { background: #D6E0D8; }
+    .design-3 { background: #D8D0E0; }
+    .design-4 { background: #E0DAD0; }
+
+    .design-card-img-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-style: italic;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .coming-soon-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--white);
+      color: var(--terracotta);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--terracotta);
+      font-weight: 500;
+    }
+
+    .design-card-body {
+      padding: 1.5rem;
+      border-top: 1px solid var(--warm);
+    }
+
+    .design-card-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
+
+    .design-card-title {
+      font-size: 1.3rem;
+      color: var(--charcoal);
+      margin-bottom: 0.6rem;
+    }
+
+    .design-card-desc {
+      font-size: 0.88rem;
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    /* ── Footer ──────────────────────────────────── */
+    footer {
+      background: var(--charcoal);
+      color: var(--warm);
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    footer .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    footer a {
+      color: var(--warm);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--terracotta); }
+
+    /* ── Animations ──────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 768px) {
+      .btn-outline-custom { margin-left: 0; margin-top: 0.8rem; }
+      .about-photo-frame::before { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══ NAVIGATION ══════════════════════════════ -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">B. Bah</a>
+      <button class="navbar-toggler border-0" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navMenu"
+              aria-controls="navMenu" aria-expanded="false" aria-label="Menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+        <ul class="navbar-nav gap-2">
+          <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#work">Ma démarche</a></li>
+          <li class="nav-item"><a class="nav-link" href="#designs">Projets</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ════════════════════════════════════ -->
+  <section class="hero">
+    <div class="container position-relative" style="z-index:1;">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <p class="hero-eyebrow">Portfolio — Conception d'interfaces usagers</p>
+          <h1 class="hero-title">
+            Binta Cherif Bah<br/>
+            <em>Ingénieure</em><br/>
+            &amp; Designer
+          </h1>
+          <p class="hero-subtitle">
+            Étudiante en génie informatique à l'Université d'Ottawa, 
+            passionnée par la technologie et la création d'expériences 
+            numériques significatives.
+          </p>
+          <a href="#designs" class="btn-primary-custom">Voir mes projets</a>
+          <a href="#about" class="btn-outline-custom">À propos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ À PROPOS ════════════════════════════════ -->
+  <section id="about">
+    <div class="container">
+      <div class="row align-items-center g-5">
+
+        <!-- Photo -->
+        <div class="col-lg-4 fade-up">
+          <div class="about-photo-frame">
+            <img src="photoportfolio.jpeg" alt="Binta Bah" style="width:100%; height:100%; object-fit:cover;" />
+          </div>
+        </div>
+
+        <!-- Texte -->
+        <div class="col-lg-8 fade-up">
+          <p class="section-eyebrow">À propos de moi</p>
+          <h2 class="section-title">Bonjour, je suis Binta ✦</h2>
+          <div class="section-divider"></div>
+
+          <p style="color: var(--ink); margin-bottom: 1.2rem;">
+            Étudiante en <strong>génie informatique</strong> à l'Université d'Ottawa, 
+            je me trouve à la croisée de deux univers qui me passionnent : 
+            la rigueur de l'ingénierie et la créativité du design d'interface.
+          </p>
+
+          <p style="color: var(--ink); margin-bottom: 1.2rem;">
+            En parallèle de mes études, j'ai travaillé comme <strong>auxiliaire 
+            d'enseignement</strong> à la Faculté de génie, ce qui me permet 
+            d'approfondir ma compréhension des concepts techniques tout 
+            en développant mes compétences en communication.
+          </p>
+
+          <p style="color: var(--ink); margin-bottom: 2rem;">
+            Ce portfolio est le reflet de mon parcours en cours dans le 
+            cadre du cours <strong>SEG3525 - Conception et analyse d'interfaces 
+            usagers</strong>. Il évoluera tout au long du semestre au fil de 
+            mes apprentissages.
+          </p>
+
+          <!-- Tags / intérêts -->
+          <div>
+            <span class="tag-pill">Génie informatique</span>
+            <span class="tag-pill">UI / UX Design</span>
+            <span class="tag-pill">Systèmes embarqués</span>
+            <span class="tag-pill">Cloud computing</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ COMMENT JE TRAVAILLE ════════════════════ -->
+  <section id="work">
+    <div class="container">
+      <div class="text-center mb-5 fade-up">
+        <p class="section-eyebrow">Ma démarche</p>
+        <h2 class="section-title">Comment je travaille</h2>
+        <div class="section-divider mx-auto"></div>
+        <p style="color: var(--ink); max-width: 560px; margin: 0 auto; font-size: 0.95rem;">
+          Je suis actuellement en apprentissage actif de la conception UI/UX 
+          dans le cadre de mes études. Voici les piliers de ma démarche.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-4 fade-up">
+          <div class="work-card">
+            <div class="work-card-number">01</div>
+            <h4>Apprendre par la pratique</h4>
+            <p>
+              Je développe mes compétences en HTML, CSS, JavaScript et 
+              Bootstrap 5 à travers les projets du cours SEG3525 et des 
+              ressources en ligne comme 
+              <a href="https://www.w3schools.com" target="_blank">W3Schools</a> 
+              et <a href="https://www.nngroup.com" target="_blank">Nielsen Norman Group</a>.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4 fade-up">
+          <div class="work-card">
+            <div class="work-card-number">02</div>
+            <h4>Ingénierie &amp; créativité</h4>
+            <p>
+              Mon background en génie informatique me donne une approche 
+              structurée et analytique, que j'applique à la conception 
+              d'interfaces centrées sur l'utilisateur.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4 fade-up">
+          <div class="work-card">
+            <div class="work-card-number">03</div>
+            <h4>Références &amp; inspiration</h4>
+            <p>
+              Je m'appuie sur les principes de 
+              <a href="https://www.nngroup.com/articles/ten-usability-heuristics/" target="_blank">NN/g</a> 
+              pour guider mes choix de conception : hiérarchie visuelle, 
+              contraste, typographie, couleur et équilibre.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PROJETS / ÉTUDES DE CAS ═════════════════ -->
+  <section id="designs">
+    <div class="container">
+      <div class="text-center mb-5 fade-up">
+        <p class="section-eyebrow">Études de cas</p>
+        <h2 class="section-title">Mes projets du semestre</h2>
+        <div class="section-divider mx-auto"></div>
+        <p style="color: var(--ink); max-width: 520px; margin: 0 auto; font-size: 0.95rem;">
+          Quatre designs seront réalisés tout au long du semestre. 
+          Ils seront mis à jour au fur et à mesure de mes apprentissages.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <!-- Design 1 -->
+        <div class="col-md-6 col-lg-3 fade-up">
+          <a href="design1.html" class="design-card">
+            <div class="design-card-img design-1">
+              <span class="design-card-img-text">Site de services</span>
+              <span class="coming-soon-badge">À venir</span>
+            </div>
+            <div class="design-card-body">
+              <p class="design-card-label">Design 1</p>
+              <h3 class="design-card-title">Site de services</h3>
+              <p class="design-card-desc">
+                Conception d'un site web pour un prestataire de services 
+                (ex. : dentiste, coiffeur, réparateur).
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Design 2 -->
+        <div class="col-md-6 col-lg-3 fade-up">
+          <a href="design2.html" class="design-card">
+            <div class="design-card-img design-2">
+              <span class="design-card-img-text">Jeu de mémoire</span>
+              <span class="coming-soon-badge">À venir</span>
+            </div>
+            <div class="design-card-body">
+              <p class="design-card-label">Design 2</p>
+              <h3 class="design-card-title">Jeu de mémoire</h3>
+              <p class="design-card-desc">
+                Interface interactive d'un jeu de mémoire avec une 
+                expérience utilisateur engageante et accessible.
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Design 3 -->
+        <div class="col-md-6 col-lg-3 fade-up">
+          <a href="design3.html" class="design-card">
+            <div class="design-card-img design-3">
+              <span class="design-card-img-text">E-commerce</span>
+              <span class="coming-soon-badge">À venir</span>
+            </div>
+            <div class="design-card-body">
+              <p class="design-card-label">Design 3</p>
+              <h3 class="design-card-title">Site e-commerce</h3>
+              <p class="design-card-desc">
+                Conception d'une boutique en ligne avec catalogue, 
+                panier et tunnel d'achat intuitif.
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Design 4 -->
+        <div class="col-md-6 col-lg-3 fade-up">
+          <a href="design4.html" class="design-card">
+            <div class="design-card-img design-4">
+              <span class="design-card-img-text">Data & BI</span>
+              <span class="coming-soon-badge">À venir</span>
+            </div>
+            <div class="design-card-body">
+              <p class="design-card-label">Design 4</p>
+              <h3 class="design-card-title">Analyse &amp; visualisation</h3>
+              <p class="design-card-desc">
+                Dashboard de visualisation de données (BI, sport 
+                ou finances) avec graphiques et indicateurs clés.
+              </p>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <p class="footer-name">Binta Bah</p>
+      <p>Étudiante en génie informatique · Université d'Ottawa</p>
+      <p style="margin-top: 0.5rem;">
+        <a href="mailto:fbah097@uottawa.ca">fbah097@uottawa.ca</a>
+      </p>
+      <p style="margin-top: 1.5rem; font-size: 0.75rem; color: var(--muted);">
+        SEG3525 — Conception et analyse d'interfaces usagers · Été 2026
+      </p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Animations au scroll -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
